@@ -42,4 +42,10 @@ public static class PieceNameExtension
         var metadata = typeof(Pieces).GetField(piece.ToString())!.GetCustomAttribute<PieceName>()!;
         return (metadata.RedSide, metadata.BlackSide);
     }
+    
+    public static char GetPieceName(this Pieces piece, Side side)
+    {
+        var metadata = typeof(Pieces).GetField(piece.ToString())!.GetCustomAttribute<PieceName>()!;
+        return side == Side.Red ? metadata.RedSide : metadata.BlackSide;
+    }
 }

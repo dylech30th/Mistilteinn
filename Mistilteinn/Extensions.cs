@@ -1,6 +1,6 @@
 ﻿namespace Mistilteinn;
 
-public static class EnumerableExtensions
+public static class Enumerates
 {
     // enumeration support for ranges
     public static IEnumerator<int> GetEnumerator(this Range range)
@@ -9,6 +9,33 @@ public static class EnumerableExtensions
         {
             yield return i;
         }
+    }
+    
+    public static IEnumerable<int> Range(int start, int stop, int step = 1)
+    {
+        if (step == 0)
+            throw new ArgumentException(nameof(step));
+
+        return RangeIterator(start, stop, step);
+    }
+    
+    private static IEnumerable<int> RangeIterator(int start, int stop, int step)
+    {
+        var x = start;
+
+        do
+        {
+            yield return x;
+            x += step;
+            if (step < 0 && x <= stop || 0 < step && stop <= x)
+                break;
+        } 
+        while (true);
+    }
+
+    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+    {
+        foreach (var t in enumerable) action(t);
     }
 }
 
