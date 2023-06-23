@@ -98,6 +98,21 @@ public interface IResult<out T, TError>
         };
     }
 
+    public void Fold(Action<T> caseSome, Action<TError> caseNone)
+    {
+        switch (this)
+        {
+            case Success<T, TError>(var value):
+                caseSome(value);
+                return;
+            case Failure<T, TError>(var error):
+                caseNone(error);
+                return;
+            default:
+                return;
+        }
+    }
+
     public IOption<T> ToOption()
     {
         return Fold(IOption<T>.Unit, _ => IOption<T>.None());

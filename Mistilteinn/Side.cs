@@ -29,4 +29,11 @@ public enum Side
 public static class SideExtension
 {
     public static Side Opponent(this Side side) => side == Side.Black ? Side.Red : Side.Black;
+
+    public static string Name(this Side side) => side switch
+    {
+        Side.Red => "红方",
+        Side.Black => "黑方",
+        _ => throw new ArgumentOutOfRangeException(nameof(side), side, null)
+    };
 }

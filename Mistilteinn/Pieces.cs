@@ -22,10 +22,10 @@ namespace Mistilteinn;
 
 public enum Pieces
 {
-    [PieceName('车', '車')]
+    [PieceName('车', '车')]
     Chariot, // 車
 
-    [PieceName('馬', '馬')]
+    [PieceName('马', '马')]
     Knight, // 马
 
     [PieceName('相', '象')]
